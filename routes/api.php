@@ -9,8 +9,20 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // php artisan make:controller AuthController
-Route::post('/v1/auth/login', [AuthController::class, "funIngresar"]);
-Route::post('/v1/auth/register', [AuthController::class, "funRegistro"]);
 
-Route::get('/v1/auth/profile', [AuthController::class, "funPerfil"])->middleware('auth:sanctum');
-Route::post('/v1/auth/logout', [AuthController::class, "funSalir"])->middleware('auth:sanctum');
+Route::prefix('/v1/auth')->group(function() {
+
+    Route::post('login', [AuthController::class, "funIngresar"]);
+    Route::post('register', [AuthController::class, "funRegistro"]);
+
+    Route::middleware('auth:sanctum')->group(function(){
+        Route::get('profile', [AuthController::class, "funPerfil"]);//->middleware('auth:sanctum');
+        Route::post('logout', [AuthController::class, "funSalir"]);// ->middleware('auth:sanctum');
+    });
+
+});
+
+
+Route::get("/no-autorizado", function(){
+    return response()->json(["mensaje" => "Necesitas un token para acceder", "error" => true], 401);
+})->name("login");

@@ -1,0 +1,31 @@
+### LOGIN
+POST https://apiflutter.blumbit.net/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "admin@mail.com",
+    "password": "admin54321"
+}
+
+### REGISTRO USUARIOS
+POST https://apiflutter.blumbit.net/api/v1/auth/register
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "Administrador",
+    "email": "admin@mail.com",
+    "password": "admin54321",
+    "cpassword": "admin54321"
+}
+
+### PERFIL
+GET https://apiflutter.blumbit.net/api/v1/auth/profile
+Accept: application/json
+Authorization: Bearer 8|6wyBZbIJOZLqpopLJcc8Rgxn2KJgDqFdENk9gge8acc40375
+
+### LOGOUT
+POST https://apiflutter.blumbit.net/api/v1/auth/logout
+Accept: application/json
+Authorization: Bearer 8|6wyBZbIJOZLqpopLJcc8Rgxn2KJgDqFdENk9gge8acc40375
