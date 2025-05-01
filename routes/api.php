@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ApiPaqueteController;
+use App\Http\Controllers\Api\ApiUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -22,6 +24,11 @@ Route::prefix('/v1/auth')->group(function() {
 
 });
 
+// Route::middleware('auth:sanctum')->group(function(){
+
+    Route::apiResource("paquete", ApiPaqueteController::class);
+    Route::apiResource("user", ApiUserController::class);
+// });
 
 Route::get("/no-autorizado", function(){
     return response()->json(["mensaje" => "Necesitas un token para acceder", "error" => true], 401);
