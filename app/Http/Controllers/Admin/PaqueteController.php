@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Orden;
 use App\Models\Paquete;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaqueteController extends Controller
 {
@@ -14,7 +16,7 @@ class PaqueteController extends Controller
     public function index()
     {
 
-        $paquetes = Paquete::get();
+        $paquetes = Paquete::orderBy('id', 'desc')->paginate(5);
 
         return view("admin.paquete.index", compact('paquetes'));
     }
@@ -33,11 +35,26 @@ class PaqueteController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "tamano" => "required",
+            "peso" => "required",
+        ]);
+
+        
+
         $paquete = new Paquete();
         $paquete->tamano = $request->tamano;
         $paquete->peso = $request->peso;
         $paquete->entrega_estimada = $request->entrega_estimada;
-        $paquete->user_id = 2;
+        $paquete->user_id = Auth::user()->id;
+
+        if($file = $request->file("imagen")){
+            $direccion_url = time() . "-" . $file->getClientOriginalName();
+            $file->move("imagenes", $direccion_url);
+
+            $paquete->imagen = "imagenes/".$direccion_url;
+        } 
+
         $paquete->save();
 
         return redirect("/paquete");
@@ -74,6 +91,24 @@ class PaqueteController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function funNuevaOrden($id){
+
+        return view("admin.paquete.orden_create", ["id" => $id]);
+        
+        
+    }
+
+    public function funguardarOrden($id, Request $request){
+        $orden = new Orden();
+        $orden->origen = $request->origen;
+        $orden->destino = $request->destino;
+        $orden->precio = $request->precio;
+        $orden->paquete_id = $id;
+        $orden->save();
+
+        return redirect("/paquete");
     }
     
 }

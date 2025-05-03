@@ -24,11 +24,13 @@ Route::prefix('/v1/auth')->group(function() {
 
 });
 
-// Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('auth:sanctum')->group(function(){
 
-    Route::apiResource("paquete", ApiPaqueteController::class);
+    Route::apiResource("paquete", ApiPaqueteController::class);// ->middleware('auth:sanctum');
     Route::apiResource("user", ApiUserController::class);
-// });
+
+});
+
 
 Route::get("/no-autorizado", function(){
     return response()->json(["mensaje" => "Necesitas un token para acceder", "error" => true], 401);

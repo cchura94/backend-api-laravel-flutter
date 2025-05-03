@@ -1,0 +1,18 @@
+### Listar Paquetes
+GET http://127.0.0.1:8000/api/paquete
+Accept: application/json
+Authorization: Bearer 6|2lwaneLAKEWvP6uq2EsHZIHvXkiSY1Hz8IiKFGHx8b276cc8
+
+### Guardar Paquete
+POST http://127.0.0.1:8000/api/paquete
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 6|2lwaneLAKEWvP6uq2EsHZIHvXkiSY1Hz8IiKFGHx8b276cc8
+
+{
+    "tamano": "MEDIANO",
+    "peso": "30",
+    "origen": "SANTA CRUZ",
+    "destino": "LA PAZ",
+    "precio": "56"
+}

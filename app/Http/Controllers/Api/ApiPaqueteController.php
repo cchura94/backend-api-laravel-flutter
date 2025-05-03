@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Orden;
 use App\Models\Paquete;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,14 +24,38 @@ class ApiPaqueteController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "tamano" => "required",
+            "peso" => "required",
+            "origen" => "required",
+            "destino" => "required",
+            "precio" => "required",
+        ]);
+
         $paquete = new Paquete();
         $paquete->tamano = $request->tamano;
         $paquete->peso = $request->peso;
         $paquete->entrega_estimada = $request->entrega_estimada;
-        $paquete->user_id = Auth::id();
+        $paquete->user_id = $request->user()->id;
+
+        // imagen
+        if($file = $request->file("imagen")){
+            $direccion_url = time() . "-" . $file->getClientOriginalName();
+            $file->move("imagenes", $direccion_url);
+
+            $paquete->imagen = "imagenes/".$direccion_url;
+        } 
+
         $paquete->save();
 
-        return response()->json(["mensaje" => "Paquete registrado correctamente"]);
+        $orden = new Orden();
+        $orden->origen = $request->origen;
+        $orden->destino = $request->destino;
+        $orden->precio = $request->precio;
+        $orden->paquete_id = $paquete->id;
+        $orden->save();
+
+        return response()->json(["mensaje" => "Paquete y orden creado registrado correctamente"]);
     }
 
     /**
@@ -38,7 +63,9 @@ class ApiPaqueteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $paquete = Paquete::with(['user', 'orden'])->find($id);
+
+        return response()->json($paquete, 200);
     }
 
     /**

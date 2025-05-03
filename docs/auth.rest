@@ -23,9 +23,25 @@ Content-Type: application/json
 ### PERFIL
 GET https://apiflutter.blumbit.net/api/v1/auth/profile
 Accept: application/json
-Authorization: Bearer 8|6wyBZbIJOZLqpopLJcc8Rgxn2KJgDqFdENk9gge8acc40375
+Authorization: Bearer 14|4BxVsdgcvjGRP6UHLblAkdJTt73ZTarBiDsuJNsr14f6843e
 
 ### LOGOUT
 POST https://apiflutter.blumbit.net/api/v1/auth/logout
 Accept: application/json
 Authorization: Bearer 8|6wyBZbIJOZLqpopLJcc8Rgxn2KJgDqFdENk9gge8acc40375
+
+
+### PERFIL
+GET http://localhost:8000/api/v1/auth/profile
+Accept: application/json
+Authorization: Bearer 6|2lwaneLAKEWvP6uq2EsHZIHvXkiSY1Hz8IiKFGHx8b276cc8
+
+### LOGIN
+POST http://localhost:8000/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "cristian@mail.com",
+    "password": "cristian54321"
+}
