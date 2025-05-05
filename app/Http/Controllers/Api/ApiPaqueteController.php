@@ -15,7 +15,7 @@ class ApiPaqueteController extends Controller
      */
     public function index()
     {
-        $paquetes = Paquete::with(['user', 'orden'])->get();
+        $paquetes = Paquete::with(['user', 'orden.seguimientos.ubicacion'])->orderBy('id', 'desc')->get();
         return response()->json($paquetes, 200);
     }
 
@@ -63,7 +63,7 @@ class ApiPaqueteController extends Controller
      */
     public function show(string $id)
     {
-        $paquete = Paquete::with(['user', 'orden'])->find($id);
+        $paquete = Paquete::with(['user', 'orden.seguimientos.ubicacion'])->find($id);
 
         return response()->json($paquete, 200);
     }

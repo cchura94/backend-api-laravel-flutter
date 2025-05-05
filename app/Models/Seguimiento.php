@@ -11,6 +11,6 @@ class Seguimiento extends Model
     }
 
     public function ubicacion(){
-        return $this->hasOne(Ubicacion::class);
+        return $this->belongsTo(Ubicacion::class);
     }
 }

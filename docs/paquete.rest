@@ -1,10 +1,10 @@
 ### Listar Paquetes
-GET http://127.0.0.1:8000/api/paquete
+GET https://apiflutter.blumbit.net/api/paquete
 Accept: application/json
-Authorization: Bearer 6|2lwaneLAKEWvP6uq2EsHZIHvXkiSY1Hz8IiKFGHx8b276cc8
+Authorization: Bearer 17|1jCa2CHKHjQvMrOj1Z5Brop9VZEw3NdfAQdg2uT9a85d1d40
 
 ### Guardar Paquete
-POST http://127.0.0.1:8000/api/paquete
+POST https://apiflutter.blumbit.net/api/paquete
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer 6|2lwaneLAKEWvP6uq2EsHZIHvXkiSY1Hz8IiKFGHx8b276cc8
@@ -16,3 +16,8 @@ Authorization: Bearer 6|2lwaneLAKEWvP6uq2EsHZIHvXkiSY1Hz8IiKFGHx8b276cc8
     "destino": "LA PAZ",
     "precio": "56"
 }
+
+### Mostrar Paquete
+GET https://apiflutter.blumbit.net/api/paquete/15
+Accept: application/json
+Authorization: Bearer 17|1jCa2CHKHjQvMrOj1Z5Brop9VZEw3NdfAQdg2uT9a85d1d40

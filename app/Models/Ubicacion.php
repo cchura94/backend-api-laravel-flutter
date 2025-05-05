@@ -10,7 +10,7 @@ class Ubicacion extends Model
         return $this->belongsTo(Ruta::class);
     }
     public function seguimiento(){
-        return $this->belongsTo(Seguimiento::class);
+        return $this->hasOne(Seguimiento::class);
     }
     
 }
