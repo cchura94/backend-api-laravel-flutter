@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApiPaqueteController;
 use App\Http\Controllers\Api\ApiUserController;
+use App\Http\Controllers\Api\OrdenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -23,7 +24,7 @@ Route::prefix('/v1/auth')->group(function() {
     });
 
 });
-
+Route::apiResource('orden', OrdenController::class);
 Route::middleware('auth:sanctum')->group(function(){
 
     Route::apiResource("paquete", ApiPaqueteController::class);// ->middleware('auth:sanctum');
