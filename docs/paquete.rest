@@ -1,7 +1,7 @@
 ### Listar Paquetes
 GET https://apiflutter.blumbit.net/api/paquete
 Accept: application/json
-Authorization: Bearer 17|1jCa2CHKHjQvMrOj1Z5Brop9VZEw3NdfAQdg2uT9a85d1d40
+Authorization: Bearer 31|daBAVlyFYR60AwvDoo2AdyTK5n8j5XYe2oJL2cBdf3ffcb15
 
 ### Guardar Paquete
 POST https://apiflutter.blumbit.net/api/paquete

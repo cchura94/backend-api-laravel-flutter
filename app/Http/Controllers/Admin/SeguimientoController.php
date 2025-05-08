@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Orden;
+use App\Models\Seguimiento;
+use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 
-class OrdenController extends Controller
+class SeguimientoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $ordenes = Orden::orderBy('id', 'desc')->paginate(5);
-
-        return view("admin.orden.index", compact('ordenes'));
+        //
     }
 
     /**
@@ -31,12 +31,25 @@ class OrdenController extends Controller
      */
     public function store(Request $request)
     {
-        $orden = new Orden();
-        $orden->origen = $request->origen;
-        $orden->destino = $request->destino;
-        $orden->precio = $request->precio;
-        $orden->paquete_id = $request->paquete_id;
-        $orden->save();
+        $ubicacion = new Ubicacion();
+        $ubicacion->direccion = $request->direccion;
+        $ubicacion->ciudad = $request->ciudad;
+        $ubicacion->pais = $request->pais;
+        $ubicacion->latitud = $request->latitud;
+        $ubicacion->longitud = $request->longitud;
+        $ubicacion->save();
+
+        $seg = new Seguimiento();
+        $seg->ubicacion_id = $ubicacion->id;
+        $seg->orden_id = $request->orden_id;
+        $seg->estado = $request->estado;
+        $seg->fecha_hora = $request->fecha_hora;
+        $seg->save();
+
+        $orden = Orden::find($request->orden_id);
+        $paquete = $orden->paquete;
+        $paquete->estado = $request->estado;
+        $paquete->save();
 
         return redirect()->back();
     }

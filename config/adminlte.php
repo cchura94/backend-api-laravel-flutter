@@ -341,9 +341,14 @@ return [
         */
         ['header' => 'Gestión'],
         [
-            'text' => 'Paquetes',
+            'text' => 'Paquetess',
             'url' => 'paquete',
             'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Ordenes',
+            'url' => 'orden',
+            'icon' => 'fas fa-fw fa-box',
         ],
         /*
         [
